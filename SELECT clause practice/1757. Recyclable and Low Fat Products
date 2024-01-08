@@ -1,0 +1,4 @@
+# This is a basic sql problem, testing if we can use WHERE clause (conditional clause) to select correct items.
+SELECT product_id
+FROM Products
+WHERE low_fats = 'Y' AND recyclable = 'Y';
