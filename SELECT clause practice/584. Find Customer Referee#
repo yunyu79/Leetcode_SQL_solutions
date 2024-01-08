@@ -1,0 +1,4 @@
+# Solution: combine more than one condition in WHERE clause by OR or AND keyword. Also, we need to know how to use EQUAL/NOT EQUAL and NULL/NOT NULL.
+SELECT name
+FROM Customer
+WHERE referee_id !=2 OR referee_id IS NULL;
