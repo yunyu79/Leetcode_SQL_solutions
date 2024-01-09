@@ -23,7 +23,7 @@ SELECT product_name, year, price
 FROM Sales AS s JOIN Product AS p
 ON s.product_id = p.product_id;
 
-# S2: Using LEFT JOIN instead INNER JOIN, becuase LEFT JOIN is faster than INNER JOIN. 
+# S2: Using LEFT JOIN instead INNER JOIN, becuase LEFT JOIN is faster than INNER JOIN and it's good for small datasets. 
 # Reason: Inner join uses broadcast join, the left join uses hash shuffle join.
 # In hash shuffle join, we shuffle each input into partitions and then run join on each of the partitions.  For broadcast join, we select smaller tables to broadcast to the partitions of a larger table without shuffling. 
 # Generally, broadcast join will perform better on larger datasets, but shuffle joins can result in a better performance(faster).
