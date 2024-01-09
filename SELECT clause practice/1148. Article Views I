@@ -7,14 +7,14 @@
 | view_date     | date    |
 +---------------+---------+
 # There is no primary key (column with unique values) for this table, the table may have duplicate rows. --> **DISTINCT**
-# Each row of this table indicates that some viewer viewed an article (written by some author) on some date. 
 # Note that equal author_id and viewer_id indicate the same person --> HAVING author_id = viewer_id
 
 # Q: Write a solution to find all the authors that viewed at least one of their own articles.  --> GROUP BY + HAVING 
 # Q: Return the result table sorted by id in ascending order. --> ORDER BY 
 
 # Solution: Q needs us to return which articles are viewed by their authors. 
-# So we need to write GROUP BY to know which articles and authors 
+# HAVING: to know who as article authors to view their articles at least once
+# GROUP BY: to know which articles were viewed by their authors at least once
 
 SELECT DISTINCT author_id AS id
 FROM Views
