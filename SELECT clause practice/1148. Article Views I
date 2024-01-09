@@ -21,3 +21,9 @@ FROM Views
 GROUP BY article_id, viewer_id
 HAVING id= viewer_id AND COUNT(viewer_id) >= 1
 ORDER BY id ASC;
+
+OR faster solution: (But in other cases, such as all authors that viewed >= 2, this doesn't work. But the above one workes.)
+SELECT DISTINCT author_id AS id
+FROM Views
+WHERE author_id = viewer_id 
+ORDER BY id ASC;
