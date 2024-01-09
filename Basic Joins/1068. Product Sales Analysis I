@@ -1,5 +1,35 @@
+Table: Sales
++-------------+-------+
+| Column Name | Type  |
++-------------+-------+
+| sale_id     | int   |
+| product_id  | int   |
+| year        | int   |
+| quantity    | int   |
+| price       | int   |
++-------------+-------+
 
+Table: Product
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| product_id   | int     |
+| product_name | varchar |
++--------------+---------+
 
+# Q: Write a solution to report the product_name, year, and price for each sale_id in the Sales table.
+# S1: Time Limit Exceeded
 SELECT product_name, year, price 
 FROM Sales AS s JOIN Product AS p
 ON s.product_id = p.product_id;
+
+# S2: Using LEFT JOIN instead INNER JOIN, becuase LEFT JOIN is faster than INNER JOIN. 
+# Reason: Inner join uses broadcast join, the left join uses hash shuffle join.
+# In hash shuffle join, we shuffle each input into partitions and then run join on each of the partitions.  For broadcast join, we select smaller tables to broadcast to the partitions of a larger table without shuffling. 
+# Generally, broadcast join will perform better on larger datasets, but shuffle joins can result in a better performance(faster).
+# Reference: https://cloud.google.com/knowledge/kb/inner-join-scans-more-data-than-left-join-during-join-stage-000004373    Google Cloud -- INNER JOIN scans more data than LEFT JOIN during join stage 
+
+SELECT product_name, year, price 
+FROM Sales AS s LEFT JOIN Product AS p
+ON s.product_id = p.product_id;
+
