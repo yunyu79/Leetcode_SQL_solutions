@@ -1,0 +1,34 @@
+Table: Visits
+
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| visit_id    | int     |
+| customer_id | int     |
++-------------+---------+
+
+Table: Transactions
++----------------+---------+
+| Column Name    | Type    |
++----------------+---------+
+| transaction_id | int     |
+| visit_id       | int     |
+| amount         | int     |
++----------------+---------+
+
+# Q: Write a solution to find the IDs of the users who visited without making any transactions and the number of times they made these types of visits.
+
+# S: Break down the question after understanding it (It's the most important to understand the question). 
+# After understanding and memorizing the **question**, we need to look at the table column names to find out which column we need. 
+# To find out which rows in a specific column IS NULL/NOT NULL  --> WHERE COLUMN IS (NOT) NULL 
+
+# !!! Reason of using WHERE instead of HAVING to filter some customers who didn't had (=NULL) a transation in a visit:
+# A HAVING clause is like a WHERE clause, but applies only to groups as a whole (that is, to the rows in the result set representing groups), 
+# whereas the WHERE clause applies to individual rows. 
+
+SELECT customer_id, COUNT(v.visit_id) AS count_no_trans 
+FROM Visits v LEFT JOIN Transactions t
+ON v.visit_id = t.visit_id 
+WHERE t.transaction_id IS NULL
+GROUP BY v.customer_id
+ORDER BY count_no_trans ASC;
