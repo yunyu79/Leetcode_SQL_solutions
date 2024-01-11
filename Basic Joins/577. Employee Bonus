@@ -1,0 +1,36 @@
+Table: Employee
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| empId       | int     |
+| name        | varchar |
+| supervisor  | int     |
+| salary      | int     |
++-------------+---------+
+
+Table: Bonus
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| empId       | int  |
+| bonus       | int  |
++-------------+------+
+
+Output: --> It is helpful to give us a picture about the output, solve faster and consider all situations by read output. 
++------+-------+
+| name | bonus |
++------+-------+
+| Brad | null  |
+| John | null  |
+| Dan  | 500   |
++------+-------+
+
+# Q: Write a solution to report the name and bonus amount of each employee with a bonus less than 1000.
+
+# S: The key to solve this problem is using LEFT JOIN, because all employees' bonus, less than 1000, are needed to output. 
+# Also, if someone's bonus is null, the info is needed to output. --> WHERE clause adds a condition of bonus IS NULL. 
+
+SELECT name, bonus 
+FROM Employee e LEFT JOIN Bonus b
+ON e.empId = b.empId 
+WHERE bonus < 1000 OR bonus IS NULL; 
