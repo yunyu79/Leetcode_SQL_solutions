@@ -1,0 +1,57 @@
+Table: Students
++---------------+---------+
+| Column Name   | Type    |
++---------------+---------+
+| student_id    | int     |
+| student_name  | varchar |
++---------------+---------+
+
+Table: Subjects
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| subject_name | varchar |
++--------------+---------+
+
+Table: Examinations
++--------------+---------+
+| Column Name  | Type    |
++--------------+---------+
+| student_id   | int     |
+| subject_name | varchar |
++--------------+---------+
+
+Output: 1. All students and subjects are required, even though they didn't attend exams about it. --> CROSS JOIN + LEFT JOIN;
+2. Zeros are shown for some students who didn't attend. --> Need to count the column including NULL. 
+--> SELECT...COUNT(Examinations.subject_name)
+
++------------+--------------+--------------+----------------+
+| student_id | student_name | subject_name | attended_exams |
++------------+--------------+--------------+----------------+
+| 1          | Alice        | Math         | 3              |
+| 1          | Alice        | Physics      | 2              |
+| 1          | Alice        | Programming  | 1              |
+| 2          | Bob          | Math         | 1              |
+| 2          | Bob          | Physics      | 0              |
+| 2          | Bob          | Programming  | 1              |
+| 6          | Alex         | Math         | 0              |
+| 6          | Alex         | Physics      | 0              |
+| 6          | Alex         | Programming  | 0              |
+| 13         | John         | Math         | 1              |
+| 13         | John         | Physics      | 1              |
+| 13         | John         | Programming  | 1              |
++------------+--------------+--------------+----------------+
+
+# Q: Write a solution to find the number of times each student attended each exam. 
+
+# S: See Output session. It is important to select the columns from which table needed to show when using LEFT JOIN, 
+# RIGHT JOIN, and CROSS JOIN, because different values could be shown in different original tables after joining, even though 
+# they have the same column names. 
+
+SELECT stu.student_id, student_name, sub.subject_name, COUNT(e.subject_name) AS attended_exams
+FROM Students stu
+CROSS JOIN Subjects sub
+LEFT JOIN Examinations e 
+ON stu.student_id = e.student_id AND sub.subject_name = e.subject_name 
+GROUP BY stu.student_id, sub.subject_name
+ORDER BY stu.student_id, sub.subject_name;
