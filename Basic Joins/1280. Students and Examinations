@@ -44,9 +44,9 @@ Output: 1. All students and subjects are required, even though they didn't atten
 
 # Q: Write a solution to find the number of times each student attended each exam. 
 
-# S: See Output session. It is important to select the columns from which table needed to show when using LEFT JOIN, 
-# RIGHT JOIN, and CROSS JOIN, because different values could be shown in different original tables after joining, even though 
-# they have the same column names. 
+# S: See Output session. It is important to select columns from which table needed to SELECT, WHERE, GROUP, HAVING, ORDER 
+# when using LEFT JOIN, RIGHT JOIN, and CROSS JOIN, because different values could be shown in different original tables 
+# after joining, even though they have the same column names. 
 
 SELECT stu.student_id, student_name, sub.subject_name, COUNT(e.subject_name) AS attended_exams
 FROM Students stu
