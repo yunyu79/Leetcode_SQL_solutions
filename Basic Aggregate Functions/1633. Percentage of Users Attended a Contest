@@ -1,0 +1,34 @@
+Table: Users
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| user_id     | int     |
+| user_name   | varchar |
++-------------+---------+
+
+Table: Register
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| contest_id  | int     |
+| user_id     | int     |
++-------------+---------+
+
+# Q: Write a solution to find the percentage of the users registered in each contest rounded to two decimals.
+# Return the result table ordered by percentage in descending order. In case of a tie, order it by contest_id in ascending order.
+
+# S: 
+SELECT contest_id, ROUND(COUNT(r.user_id)/num_user*100,2) AS percentage 
+FROM Register r CROSS JOIN (
+    SELECT COUNT(u.user_id) AS num_user
+    FROM Users u
+) u1
+GROUP BY contest_id
+ORDER BY percentage DESC, contest_id ASC;
+
+# S2: Better! We can calculate the number of all users by using another SELECT to get the value back in SELECT clause. 
+SELECT  contest_id, ROUND(COUNT(distinct user_id) * 100/ (SELECT COUNT(user_id) FROM Users), 2) as percentage
+FROM Register
+GROUP BY contest_id
+ORDER BY percentage DESC, contest_id;
+# Reference: jasurbekaktamov081 (Leetcode Solution) https://leetcode.com/problems/percentage-of-users-attended-a-contest/solutions/3789653/sql-subquery-group-by-order-by-easy-to-understand/?envType=study-plan-v2&envId=top-sql-50
