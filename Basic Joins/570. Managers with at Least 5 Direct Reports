@@ -1,0 +1,31 @@
+Table: Employee
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| name        | varchar |
+| department  | varchar |
+| managerId   | int     |
++-------------+---------+
+
+# Q: Write a solution to find managers with at least five direct reports.
+
+# S1: Using subquery. 
+SELECT name
+FROM Employee e1
+WHERE e1.id IN (
+    SELECT e2.managerId
+    FROM Employee e2
+    GROUP BY e2.managerId
+    HAVING COUNT(*) >= 5
+);
+
+# S2: Create a new sub-table to join another table by selecting(filtering) just what we need.
+SELECT E1.name
+FROM Employee E1
+JOIN (
+    SELECT managerId, COUNT(*) AS directReports
+    FROM Employee
+    GROUP BY managerId
+    HAVING COUNT(*) >= 5
+) E2 ON E1.id = E2.managerId;
