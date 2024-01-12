@@ -8,7 +8,7 @@ Table: Cinema
 | rating         | float    |
 +----------------+----------+
 
-# Q: Write a solution to report the movies with an odd-numbered ID and a description that is not "boring". --> odd --> num%2 = 1; IS NOT --> !=
+# Q: Write a solution to report the movies with an odd-numbered ID and a description that is not "boring". --> odd --> "num%2 = 1"; IS NOT --> "!="
 # Return the result table ordered by rating in descending order.
 
 # S: 
