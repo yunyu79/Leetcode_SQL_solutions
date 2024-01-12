@@ -1,0 +1,30 @@
+Table: Signups
++----------------+----------+
+| Column Name    | Type     |
++----------------+----------+
+| user_id        | int      |
+| time_stamp     | datetime |
++----------------+----------+
+
+Table: Confirmations
++----------------+----------+
+| Column Name    | Type     |
++----------------+----------+
+| user_id        | int      |
+| time_stamp     | datetime |
+| action         | ENUM     |
++----------------+----------+
+
+# The confirmation rate of a user is the number of 'confirmed' messages divided by the total number of requested   --> seems like to use division, but in this case, division is hard, becuase we need to know two COUNT() based on different filter conditions in a block.
+# confirmation messages. The confirmation rate of a user that did not request any confirmation messages is 0.      --> We are given a hint. Since no confirmation can be treat as 0, we can use AVG to calculate replacing division. 
+# Round the confirmation rate to two decimal places.
+
+# Q: Write a solution to find the confirmation rate of each user.
+
+# S: 
+SELECT s.user_id, ROUND(AVG(if(c.action='confirmed',1,0)),2) AS confirmation_rate 
+FROM Signups s LEFT JOIN Confirmations c
+ON s.user_id = c.user_id
+GROUP BY user_id;
+
+# Reference: deepankyadav (Leetcode 1934 Solution)
