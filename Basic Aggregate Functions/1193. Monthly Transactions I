@@ -22,7 +22,9 @@ Output:
 
 # Q: Write an SQL query to find for each month and country, the number of transactions and their total amount, the number of approved transactions and their total amount.
 
-# S: 
+# S:     ------------------------> COUNT expression: if the condition is not true, 
+                                   the value if false should be set to NULL. It is not like SUM() which should be set to 0. 
+
 SELECT DATE_FORMAT(trans_date, '%Y-%m') AS month, country, COUNT(*) AS trans_count, COUNT(IF(state='approved', 1, NULL)) AS approved_count, SUM(amount) AS trans_total_amount, SUM(IF(state='approved', amount, 0)) AS approved_total_amount 
 FROM Transactions
 GROUP BY month, country;
