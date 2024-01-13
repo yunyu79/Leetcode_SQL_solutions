@@ -1,0 +1,15 @@
+Table: Courses
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| student     | varchar |
+| class       | varchar |
++-------------+---------+
+
+# Q: Write a solution to find all the classes that have at least five students.
+
+# S:
+SELECT class   
+FROM Courses
+GROUP BY class
+HAVING COUNT(student)>=5;
