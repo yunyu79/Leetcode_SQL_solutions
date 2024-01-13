@@ -8,7 +8,7 @@ Table: MyNumbers
 # Q: A single number is a number that appeared only once in the MyNumbers table.
 # Find the largest single number. If there is no single number, report null.
 
-# S:                                                       -----------------------------> The syntax of ISNULL and IFNULL is the same.
+# S:                                                       -----------------------------> The syntax of ISNULL and IFNULL are the same.
 SELECT IFNULL(MAX(num), NULL) AS num
 FROM MyNumbers 
 WHERE num IN (
