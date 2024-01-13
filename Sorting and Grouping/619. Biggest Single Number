@@ -17,3 +17,12 @@ WHERE num IN (
     GROUP BY num
     HAVING COUNT(num) = 1
 );
+
+# S2: Another method is to create new table to SELECT MAX value, instead of adding conditions in WHERE clause. 
+SELECT MAX(num) AS num 
+FROM (
+    SELECT num 
+    FROM MyNumbers 
+    GROUP BY num 
+    HAVING COUNT(num) = 1 
+) NEW;
