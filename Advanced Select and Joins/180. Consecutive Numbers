@@ -1,0 +1,18 @@
+Table: Logs
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| num         | varchar |
++-------------+---------+
+
+# Q: Find all numbers that appear at least three times consecutively.
+
+# S:
+SELECT DISTINCT num AS ConsecutiveNums
+FROM Logs
+WHERE (id + 1, num) IN (
+    SELECT l1.id, l1.num
+    FROM Logs l1 JOIN Logs l2
+    ON l1.id = l2.id - 1 AND l1.num = l2.num
+);
