@@ -9,7 +9,7 @@ Table: Products
 
 # Q: Write a solution to find the prices of all products on 2019-08-16. Assume the price of all products before any change is 10.
 
-# S:                               -----------------------> To return a row containing a MAX value in its column, we need to use subquery to find out the MAX in a column,
+# S1:                               -----------------------> To return a row containing a MAX value in its column, we need to use subquery to find out the MAX in a column,
                                                             then, we can find out the row containing this MAX value according to the returned MAX value. 
 SELECT DISTINCT p.product_id, IFNULL(p1.new_price, 10) AS price 
 FROM Products AS p 
@@ -24,3 +24,5 @@ LEFT JOIN (
     )
     ) AS p1
 ON p.product_id = p1.product_id;
+
+# S2: Using UNION to join two result-sets. One result-set should SELECT those MIN(change_date) > '2019-08-16'; the other one should SELECT MAX(..) <= '..'. 
