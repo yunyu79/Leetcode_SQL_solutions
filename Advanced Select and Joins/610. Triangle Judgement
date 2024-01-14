@@ -1,0 +1,23 @@
+Table: Triangle
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| x           | int  |
+| y           | int  |
+| z           | int  |
++-------------+------+
+
+# Q: Report for every three line segments whether they can form a triangle.
+
+# S1: Using CASE WHEN
+SELECT x, y, z, (
+    CASE
+    WHEN (x + y > z) AND (x + z > y) AND (y + z > x) THEN 'Yes'
+    ELSE 'No'
+    END
+) AS triangle
+FROM Triangle;
+
+# S2: Using IF                                  --------------------> When result will be just two categories, we can use IF. 
+SELECT x, y, z, IF(x + y > z AND x + z > y AND y + z > x, 'Yes', 'No') AS triangle
+FROM Triangle;
