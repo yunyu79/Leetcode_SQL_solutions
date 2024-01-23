@@ -1,0 +1,17 @@
+Table: Employee
++-------------+------+
+| Column Name | Type |
++-------------+------+
+| id          | int  |
+| salary      | int  |
++-------------+------+
+
+# Q: Write a solution to find the second highest salary from the Employee table. If there is no second highest salary, return null (return None in Pandas).
+
+# S:
+SELECT IFNULL((
+    SELECT DISTINCT salary
+    FROM Employee
+    ORDER BY salary DESC
+    Limit 1 OFFSET 1
+), NULL) AS SecondHighestSalary;
