@@ -8,7 +8,7 @@ Table: Employee
 
 # Q: Write a solution to find the second highest salary from the Employee table. If there is no second highest salary, return null (return None in Pandas).
 
-# S:
+# S:               -----------------> We can just only use SELECT without any other clause, if there is no need to get data from a table or we just output some calculations. 
 SELECT IFNULL((
     SELECT DISTINCT salary
     FROM Employee
