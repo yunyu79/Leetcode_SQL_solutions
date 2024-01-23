@@ -1,0 +1,19 @@
+Table: Person
++-------------+---------+
+| Column Name | Type    |
++-------------+---------+
+| id          | int     |
+| email       | varchar |
++-------------+---------+
+
+# Q: Write a solution to delete all duplicate emails, keeping only one unique email with the smallest id.
+# For SQL users, please note that you are supposed to write a DELETE statement and not a SELECT one.
+# After running your script, the answer shown is the Person table. The driver will first compile and run your piece of code and then show the Person table. 
+# The final order of the Person table does not matter.
+
+# S1: 
+DELETE p1
+FROM Person p1 JOIN Person p2
+ON p1.email = p2.email AND p1.id > p2.id;
+
+# S2: The first thing is to find out MIN(id) by groupping email. Then, we filter the ids which are NOT IN the result of subquery. 
