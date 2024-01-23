@@ -10,7 +10,7 @@ Table Activities:
 # The sold products names for each date should be sorted lexicographically. 
 # Return the result table ordered by sell_date. 
 
-# S:                    ------------------GROUP_CONCAT() is to concat values in multiple rows into one field. 
+# S:                    ------------------GROUP_CONCAT() is to concat values in multiple rows into one field with default setting of separator ",". 
 SELECT sell_date, COUNT(DISTINCT product) AS num_sold, GROUP_CONCAT(DISTINCT product ORDER BY 
 product) AS products
 FROM Activities 
